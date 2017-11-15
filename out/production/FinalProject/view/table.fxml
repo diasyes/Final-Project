@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="table" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableController">
+  <columns>
+    <TableColumn fx:id="firstNameCol" prefWidth="141.0" text="First Name" />
+    <TableColumn fx:id="lastNameCol" prefWidth="135.0" text="Last Name" />
+    <TableColumn fx:id="usernameCol" prefWidth="123.0" text="Username" />
+    <TableColumn fx:id="addressCol" prefWidth="252.0" text="Address" />
+    <TableColumn fx:id="cityCol" prefWidth="147.0" text="City" />
+    <TableColumn fx:id="stateCol" prefWidth="82.0" text="State" />
+    <TableColumn fx:id="zipCol" prefWidth="160.0" text="Zip Code " />
+  </columns>
+</TableView>

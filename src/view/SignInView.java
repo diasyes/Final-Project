@@ -23,7 +23,7 @@ public class SignInView extends Application{
 
     private void loadUserDB(){
         try {
-            UserDB.setUsers1((MyLinkedList<User>) UserIO.readUsers());
+            UserDB.setUsers1((MyLinkedList<User>)UserIO.readUsers());
         }catch (Exception e){
 
         }

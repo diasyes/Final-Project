@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<TableView fx:id="table" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableController">
-  <columns>
-    <TableColumn fx:id="firstNameCol" prefWidth="141.0" text="First Name" />
-    <TableColumn fx:id="lastNameCol" prefWidth="135.0" text="Last Name" />
-    <TableColumn fx:id="usernameCol" prefWidth="123.0" text="Username" />
-    <TableColumn fx:id="addressCol" prefWidth="252.0" text="Address" />
-    <TableColumn fx:id="cityCol" prefWidth="147.0" text="City" />
-    <TableColumn fx:id="stateCol" prefWidth="82.0" text="State" />
-    <TableColumn fx:id="zipCol" prefWidth="160.0" text="Zip Code " />
-  </columns>
-</TableView>
+<AnchorPane prefHeight="830.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TableController">
+   <children>
+      <TableView fx:id="table" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="751.0" prefWidth="1495.0">
+        <columns>
+          <TableColumn fx:id="firstNameCol" prefWidth="141.0" text="First Name" />
+          <TableColumn fx:id="lastNameCol" prefWidth="135.0" text="Last Name" />
+          <TableColumn fx:id="usernameCol" prefWidth="123.0" text="Username" />
+          <TableColumn fx:id="addressCol" prefWidth="252.0" text="Address" />
+          <TableColumn fx:id="cityCol" prefWidth="147.0" text="City" />
+          <TableColumn fx:id="stateCol" prefWidth="82.0" text="State" />
+          <TableColumn fx:id="zipCol" prefWidth="160.0" text="Zip Code " />
+            <TableColumn fx:id="latitudeCol" prefWidth="160.0" text="Latitude" />
+            <TableColumn fx:id="longitudeCol" prefWidth="160.0" text="Longitude" />
+            <TableColumn fx:id="distanceCol" prefWidth="132.0" text="Distance(km)" />
+        </columns>
+      </TableView>
+      <Button fx:id="searchButton" layoutX="809.0" layoutY="769.0" mnemonicParsing="false" onAction="#getLocationValues" text="Search" textFill="#e81414">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Label fx:id="mainLabel" layoutX="396.0" layoutY="774.0" text="Press to find Latitudes and Lognitudes" textFill="#d31515">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

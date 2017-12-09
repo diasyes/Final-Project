@@ -3,6 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.User;
 import model.UserDB;
 import view.SignUpView;
 import view.TableView;
@@ -17,6 +18,7 @@ public class SignInController {
     public Label usernameLabel;
     public Label passwordLabel;
     public TextField username;
+    public static User loggedInUser;
 
     public void openSignUpView(ActionEvent event)throws IOException {
         Stage stage = (Stage)signIn.getScene().getWindow();
@@ -25,8 +27,10 @@ public class SignInController {
     }
 
     public void authorize() throws IOException{
+        System.out.println(UserDB.getUsers1().size());
         for (int i = 0; i < UserDB.getUsers1().size(); i++){
             if (username.getText().equals(UserDB.getUsers1().get(i).getUsername()) && password.getText().equals(UserDB.getUsers1().get(i).getPassword())){
+                loggedInUser = UserDB.getUsers1().get(i);
                 usernameLabel.setText("Welcome " + username.getText() + "!");
                 passwordLabel.setText("You have successfully logged in!");
                 Stage stage = (Stage)signIn.getScene().getWindow();

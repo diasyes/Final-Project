@@ -74,8 +74,8 @@ public class SignUpController {
     private String zipText;
 
     //creating patterns to check the interior of the string
-    private Pattern noSpecialCharacters = Pattern.compile("[^A-Za-z0-9]");
-    private Pattern noNumbersOrSpecialCharacters = Pattern.compile("[^A-za-z]");
+    private Pattern noSpecialCharacters = Pattern.compile("[^a-zA-Z0-9]");
+    private Pattern noNumbersOrSpecialCharacters = Pattern.compile("[^A-Za-z_]+( [a-zA-Z_]+)*$");
     private Pattern passwordUpperCase = Pattern.compile("[^A-Z]");
     private Pattern passwordNumber = Pattern.compile("[^0-9]");
     private Pattern passwordSpecial = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");

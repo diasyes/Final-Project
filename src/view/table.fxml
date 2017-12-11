@@ -23,14 +23,29 @@
             <TableColumn fx:id="distanceCol" prefWidth="132.0" text="Distance(km)" />
         </columns>
       </TableView>
-      <Button fx:id="searchButton" layoutX="809.0" layoutY="769.0" mnemonicParsing="false" onAction="#getLocationValues" text="Search" textFill="#e81414">
+      <Button fx:id="searchButton" layoutX="483.0" layoutY="772.0" mnemonicParsing="false" onAction="#getLocationValues" text="Search" textFill="#e81414">
          <font>
-            <Font size="17.0" />
+            <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
       </Button>
-      <Label fx:id="mainLabel" layoutX="396.0" layoutY="774.0" text="Press to find Latitudes and Lognitudes" textFill="#d31515">
+      <Label fx:id="mainLabel" layoutX="122.0" layoutY="777.0" text="Press to find Latitudes and Lognitudes" textFill="#d31515">
          <font>
-            <Font size="19.0" />
+            <Font name="Berlin Sans FB Demi Bold" size="19.0" />
+         </font>
+      </Label>
+      <Button fx:id="openButton" layoutX="1243.0" layoutY="773.0" mnemonicParsing="false" onAction="#openMap" text="Open">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="16.0" />
+         </font>
+      </Button>
+      <Label layoutX="1015.0" layoutY="778.0" text="Press to open the Map" textFill="#0900ff">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="rangeText" layoutX="730.0" layoutY="778.0" prefHeight="23.0" prefWidth="9.0">
+         <font>
+            <Font name="Berlin Sans FB Demi Bold" size="19.0" />
          </font>
       </Label>
    </children>

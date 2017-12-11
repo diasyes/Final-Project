@@ -11,10 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.User;
 import model.UserDB;
 import org.json.JSONObject;
+import view.GoogleMapView;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -28,15 +30,18 @@ public class TableController {
     public TableView<User> table;
     public TableColumn<User, Integer> zipCol;
     public ArrayList<User> myArrayList = new ArrayList<>();
-    public ObservableList<User> myList;
+    public static ObservableList<User> myList;
     public TableColumn latitudeCol;
     public TableColumn longitudeCol;
     public Button searchButton;
     public Label mainLabel;
     public TableColumn distanceCol;
-
+    public Button openButton;
+    public Label rangeText;
+    int value = 0;
     @FXML
     public void initialize(){
+        openButton.setDisable(true);
         firstNameCol.setCellValueFactory(
                 new PropertyValueFactory<>("firstName"));
         lastNameCol.setCellValueFactory(
@@ -66,7 +71,7 @@ public class TableController {
             @Override
             public TableRow<User> call(TableView<User> param) {
                 final TableRow<User> row = new TableRow<User>() {
-                    int value = 0;
+
                     @Override
                     protected void updateItem(User item, boolean empty) {
                         super.updateItem(item, empty);
@@ -74,7 +79,7 @@ public class TableController {
                         for (int i = 0; i<table.getItems().size(); i++){
                             if (table.getItems().get(i).equals(SignInController.loggedInUser)){
                                 value = i;
-                            }
+                                }
                         }
                         for (int i = 0; i < table.getItems().size(); i++){
                             if (getIndex()==i){
@@ -89,6 +94,9 @@ public class TableController {
                 return row;
             }
         });
+        if (GoogleMapController.radius != 0){
+            rangeText.setText(String.valueOf(GoogleMapController.radius));
+        }
     }
     public void getLocationValues() throws ApiException, InterruptedException, IOException{
         GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyDH_zgBjQ2F8oMZaTqCOKNzYAbQ9oDjvBw").build();
@@ -99,17 +107,28 @@ public class TableController {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             JSONObject obj = new JSONObject(gson.toJson(results[0]));
             JSONObject loc = obj.getJSONObject("geometry").getJSONObject("location");
-            System.out.println("lat: " + loc.getDouble("lat") +
-                    ", lng: " + loc.getDouble("lng"));
             UserDB.getUsers1().get(i).setLatitude(loc.getDouble("lat"));
             UserDB.getUsers1().get(i).setLongitude(loc.getDouble("lng"));
-            UserDB.getUsers1().get(i).setDistance((int)distance(SignInController.loggedInUser.getLatitude(), SignInController.loggedInUser.getLongitude(),loc.getDouble("lat"), loc.getDouble("lng")));
+            if (i==value){
+                SignInController.loggedInUser.setLatitude(loc.getDouble("lat"));
+                SignInController.loggedInUser.setLongitude(loc.getDouble("lng"));
+            }
+        }
+        for (int i = 0; i < UserDB.getUsers1().size(); i ++){
+            UserDB.getUsers1().get(i).setDistance((int)distance(SignInController.loggedInUser.getLatitude(), SignInController.loggedInUser.getLongitude(),UserDB.getUsers1().get(i).getLatitude(),UserDB.getUsers1().get(i).getLongitude()));
         }
         table.refresh();
         table.getSortOrder().add(distanceCol);
         distanceCol.setSortType(TableColumn.SortType.ASCENDING);
         distanceCol.setSortable(true);
         table.sort();
+        openButton.setDisable(false);
+    }
+
+    public void openMap() throws IOException{
+        new GoogleMapView();
+        Stage stage = (Stage)openButton.getScene().getWindow();
+        stage.close();
     }
 
     //functions for distance
@@ -119,7 +138,8 @@ public class TableController {
         dist = Math.acos(dist);
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
-        return (Math.round(dist*100))/100;
+        dist = dist * 1.609344;
+        return dist;
     }
 
     //This function converts decimal degrees to radians
